@@ -1,110 +1,83 @@
-
-
-function calculate() {
-    console.log("INPUT:");
-    // Sight settings
-    let elevationClick = document.getElementById("elevationTextBox").value;
-    let elevationUnits = document.getElementById("elevationUnitsMillimeters").checked ? "mm" : "in";
-    console.log(`elevationClick: ${elevationClick} ${elevationUnits}`);
-
-    let windageClick = document.getElementById("windageTextBox").value;
-    let windageUnits = document.getElementById("windageUnitsMillimeters").checked ? "mm" : 'in'
-    console.log(`windageClick: ${windageClick} ${windageUnits}`);
-
-    // Shooting info
-    let shootingDistance = document.getElementById("shootingDistanceTextBox").value;
-    let shootingDistanceUnits = document.getElementById("shootingDistanceUnitsMeters").checked ? "m" : "yd";
-    console.log(`shootingDistance: ${shootingDistance} ${shootingDistanceUnits}`);
+<!DOCTYPE html>
+<head>
+    <title>Sight Calculator Site V1.0.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="calculator.js" async></script>
+</head>
+<body>
+    <h1>Sight Calculator Site</h1>
+    The purpose of this site is to calculate how much you have to move your sight in order to center your arrow group.
     
-    let eyeToSightDistance = document.getElementById("eyeToSightDistanceTextBox").value;
-    let eyeToSightUnits = document.getElementById("eyeToSightDistanceUnitsCentimeters").checked ? "cm" : "in";
-    console.log(`eyeToSightDistance: ${eyeToSightDistance} ${eyeToSightUnits}`);
+    <h2>Sight Information</h2>
+    Here you will input information about your sight:
+    <form>
+        <li>
+            <label for="elevationTextBox">1 click adjusts the elevation by</label>
+            <input type="text" id="elevationTextBox" name="elevationTextBox">
+            <input type="radio" id="elevationUnitsMillimeters" name="elevationUnits" value="mm" checked="true">
+            <label for="elevationUnitsMillimeters">mm</label>
+            <input type="radio" id="elevationUnitsInches" name="elevationUnits" value="in">
+            <label for="elevationUnitsInches">in</label><br>
+        </li>
 
-    // Shot info
-    let arrowElevationFromCenter = document.getElementById("arrowElevationTextBox").value;
-    let arrowElevationFromCenterUnits = document.getElementById("arrowElevationUnitsCentimeters").checked ? "cm" : "in";
-    console.log(`arrowElevationFromCenter: ${arrowElevationFromCenter} ${arrowElevationFromCenterUnits}`);
+        <li>
+            <label for="windageTextBox">1 click adjusts the windage by</label>
+            <input type="text" id="windageTextBox" name="windageTextBox">
+            <input type="radio" id="windageUnitsMillimeters" name="windageUnits" value="mm" checked=true>
+            <label for="windageUnitsMillimeters">mm</label>
+            <input type="radio" id="windageUnitsInches" name="windageUnits" value="in">
+            <label for="windageUnitsInches">in</label><br>
+        </li>
+    </form>
 
-    let arrowWindageFromCenter = document.getElementById("arrowWindageTextBox").value;
-    let arrowWindageFromCenterUnits = document.getElementById("arrowWindageUnitsCentimeters").checked ? "cm" : "in";
-    console.log(`arrowWindageFromCenter: ${arrowWindageFromCenter} ${arrowWindageFromCenterUnits}`);
+    <h2>Shooting Information</h2>
+    Input information about the shooting scenario:
+    <form>
+        <li>
+            <label for="shootingDistanceTextBox">Shooting distance</label>
+            <input type="text" id="shootingDistanceTextBox" name="shootingDistanceTextBox">
+            <input type="radio" id="shootingDistanceUnitsMeters" name="shootingDistanceUnits" value="meters" checked=true>
+            <label for="shootingDistanceUnitsMeters">meters</label>
+            <input type="radio" id="shootingDistanceUnitsYards" name="shootingDistanceUnits" value="yards">
+            <label for="shootingDistanceUnitsYards">yards</label><br>
+        </li>
 
-    console.log("\nCONVERTED VARIABLES:");
-    // Convert sight settings input into mm
-    if (!document.getElementById("elevationUnitsMillimeters").checked) {
-        elevationClick *= 25.4;
-    }
-    console.log(`elevationClick: ${elevationClick}mm`)
+        <li>
+            <label for="eyeToSightDistanceTextBox">Eye to sight distance</label>
+            <input type="text" id="eyeToSightDistanceTextBox" name="eyeToSightDistanceTextBox">
+            <input type="radio" id="eyeToSightDistanceUnitsCentimeters" name="eyeToSightDistanceUnits" value="cm" checked=true>
+            <label for="eyeToSightDistanceUnitsCentimeters">cm</label>
+            <input type="radio" id="eyeToSightDistanceUnitsInches" name="eyeToSightDistanceUnits" value="in">
+            <label for="eyeToSightDistanceUnitsInches">in</label><br>
+        </li>
+    </form>
 
-    if (!document.getElementById("windageUnitsMillimeters").checked) {
-        windageClick *= 25.4;
-    }
-    console.log(`windageClick: ${windageClick}mm`)
-    
-    // Convert shooting info input into mm
-    if (document.getElementById("shootingDistanceUnitsMeters").checked) {
-        shootingDistance *= 1000
-    }
-    else {
-        shootingDistance *= 914.4;
-    }
-    console.log(`shootingDistance: ${shootingDistance}mm`)
+    <h2>Shot Information</h2>
+    Input information about the shot (negative value = under/left, positive value = above/right)
+    <form>
+        <li>
+            <label for="arrowElevationTextBox">Arrow elevation from center</label>
+            <input type="text" id="arrowElevationTextBox" name="arrowElevationTextBox">
+            <input type="radio" id="arrowElevationUnitsCentimeters" name="arrowElevationUnits" value="cm" checked=true>
+            <label for="arrowElevationUnitsCentimeters">cm</label>
+            <input type="radio" id="arrowElevationInches" name="arrowElevationUnits" value="in">
+            <label for="arrowElevationInches">in</label><br>
+        </li>
 
-    if (document.getElementById("eyeToSightDistanceUnitsCentimeters").checked) {
-        eyeToSightDistance *= 10;
-    }
-    else {
-        eyeToSightDistance *= 25.4;
-    }
-    console.log(`eyeToSightDistance: ${eyeToSightDistance}mm`)
+        <li>
+            <label for="arrowWindageTextBox">Arrow windage from center </label>
+            <input type="text" id="arrowWindageTextBox" name="arrowWindageTextBox">
+            <input type="radio" id="arrowWindageUnitsCentimeters" name="arrowWindageUnits" value="cm" checked=true>
+            <label for="arrowWindageUnitsCentimeters">cm</label>
+            <input type="radio" id="arrowWindageUnitsInches" name="arrowWindageUnits" value="in">
+            <label for="arrowWindageUnitsInches">in</label><br>
+        </li>
+    </form>
 
-    // Convert sight settings input into mm
-    if (document.getElementById("arrowElevationUnitsCentimeters").checked) {
-        arrowElevationFromCenter *= 10;
-    }
-    else {
-        arrowElevationFromCenter *= 25.4;
-    }
-    console.log(`arrowElevationFromCenter: ${arrowElevationFromCenter}mm`)
+    <h2>Results</h2>
+    <p id="elevationResultText"></p> 
+    <p id="windageResultText"></p> 
+    <button id="calculateButton" onclick="calculate();">Calculate</button>
 
-    if (document.getElementById("arrowWindageUnitsCentimeters").checked) {
-        arrowWindageFromCenter *= 10;    
-    }
-    else {
-        arrowWindageFromCenter *= 25.4;
-    }
-    console.log(`arrowWindageFromCenter: ${arrowWindageFromCenter}mm`)
-
-    // Calculations
-    let sightElevationAngle = Math.atan(arrowElevationFromCenter/shootingDistance);
-    let sightWindageAngle = Math.atan(arrowWindageFromCenter/shootingDistance);
-
-    let sightElevationChange = Math.tan(sightElevationAngle) * eyeToSightDistance;
-    let sightWindageChange = Math.tan(sightWindageAngle) * eyeToSightDistance;
-
-    let calculatedElevationClicks = sightElevationChange * elevationClick;
-    let calculatedWindageClicks = sightWindageChange * windageClick;
-    calculatedElevationClicks = Math.round(calculatedElevationClicks);
-    calculatedWindageClicks = Math.round(calculatedWindageClicks);
-
-    let elevationOutput = "";
-    if (calculatedElevationClicks > 0) {
-        elevationOutput = `You need to move your sight up ${calculatedElevationClicks} clicks.\n`
-    }
-    else if (calculatedElevationClicks < 0) {
-        elevationOutput = `You need to move your sight down ${calculatedElevationClicks*-1} clicks.\n`
-    }
-
-    let windageOutput = "";
-    if (calculatedWindageClicks > 0) {
-        windageOutput += `You need to move your sight right ${calculatedElevationClicks} clicks.\n`
-    }
-    else if (calculatedWindageClicks < 0) {
-        windageOutput += `You need to move your sight left ${calculatedElevationClicks*-1} clicks.\n`
-    }
-    
-    document.getElementById("elevationResultText").innerHTML = elevationOutput;
-    document.getElementById("windageResultText").innerHTML = windageOutput;
-
-    console.log("-----------------------------------------");
-}
+</body>
+</html>
